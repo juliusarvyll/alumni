@@ -21,7 +21,6 @@
 <br>
         <div class="container">
             <h1 class="text-uppercase text-center">About Us</h1>
-            <hr class="divider my-4" />
         </div>
 
     <!-- Page Section -->

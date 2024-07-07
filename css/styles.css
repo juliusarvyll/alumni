@@ -9851,17 +9851,3 @@ div#menu-field img, div#menu-field .menu-item-details {
 section {
     background: #cccccc;
 }
-header.masthead:before {
-    content: "";
-    background: #00000087;
-    position: absolute;
-    width: calc(100%);
-    /* height: calc(100%); */
-    top: 0;
-    height: 60vh;
-    z-index: 1;
-}
-header.masthead>div{
-position: relative;
-z-index: 2;
-}

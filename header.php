@@ -2,6 +2,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cdbootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cdbootstrap/css/cdb.min.css" />
+        <link rel="stylesheet" href="/css/style.css"/>
         <title><?php echo $_SESSION['system']['name'] ?></title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
@@ -24,7 +27,6 @@
         <script src="admin/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
     <script type="text/javascript" src="admin/assets/js/select2.min.js"></script>
-
     <script type="text/javascript" src="admin/assets/js/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript" src="admin/assets/js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 

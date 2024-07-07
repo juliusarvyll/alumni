@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <?php
 session_start();
 include('admin/db_connect.php');
@@ -33,27 +34,34 @@ include('header.php');
         font-family: 'Arial', sans-serif;
     }
     .sidebar {
-        height: 100vh;
         width: 250px;
         position: fixed;
         top: 0;
         left: 0;
-        background-color: #ffffff;
+        background-color: #9DB2BF;
         color: #343a40;
         padding-top: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
+        overflow-y: auto; /* Allows scrolling on the sidebar */
     }
     .sidebar a {
-        padding: 10px 20px;
+        padding: 12px 20px; 
         text-decoration: none;
-        font-size: 18px;
+        text-align: center;
+        font-size: 1.5rem; 
         color: #343a40;
-        display: block;
+        display: flex;
         transition: all 0.3s ease;
         border-radius: 4px;
     }
-    .sidebar a:hover {
+    .icon {
+        font-size: 2rem;
+        margin-right: 1rem; 
+    }
+    .sidebar .nav-link:hover {
+        color: #9DB2BF;
+        background-color: #526D82;
         transform: translateX(10px);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
@@ -65,14 +73,7 @@ include('header.php');
         text-align: center;
     }
     .sidebar .navbar-brand img {
-        height: 40px;
-        margin-right: 10px;
-    }
-    .sidebar .nav-link {
-        display: flex;
-        align-items: center;
-    }
-    .sidebar .nav-link i {
+        width:9rem;
         margin-right: 10px;
     }
     .content {
@@ -136,19 +137,18 @@ include('header.php');
     <!-- Sidebar -->
     <div class="sidebar">
         <a class="navbar-brand" href="./">
-            <img src="assets/img/logo.png" alt="Logo">
-            <?php echo $_SESSION['system']['name'] ?>
+            <img src="assets/img/logo.png" alt="Logo"> 
         </a>
-        <a class="nav-link" href="index.php?page=home"><i class="fa fa-home"></i> Home</a>
-        <a class="nav-link" href="index.php?page=alumni_list"><i class="fa fa-users"></i> Alumni</a>
-        <a class="nav-link" href="index.php?page=gallery"><i class="fa fa-image"></i> Gallery</a>
+        <a class="nav-link" href="index.php?page=home"><i class="fa fa-home icon"></i>Home</a>
+        <a class="nav-link" href="index.php?page=alumni_list"><i class="fa fa-users icon"></i>Alumni</a>
+        <a class="nav-link" href="index.php?page=gallery"><i class="fa fa-image icon"></i>Gallery</a>
         <?php if(isset($_SESSION['login_id'])): ?>
-        <a class="nav-link" href="index.php?page=careers"><i class="fa fa-briefcase"></i> Jobs</a>
-        <a class="nav-link" href="index.php?page=forum"><i class="fa fa-comments"></i> Forums</a>
+        <a class="nav-link" href="index.php?page=careers"><i class="fa fa-briefcase icon"></i>Jobs</a>
+        <a class="nav-link" href="index.php?page=forum"><i class="fa fa-comments icon"></i>Forums</a>
         <?php endif; ?>
-        <a class="nav-link" href="index.php?page=about"><i class="fa fa-info-circle"></i> About</a>
+        <a class="nav-link" href="index.php?page=about"><i class="fa fa-info-circle icon"></i>About</a>
         <?php if(!isset($_SESSION['login_id'])): ?>
-        <a class="nav-link" href="#" id="login"><i class="fa fa-sign-in-alt"></i> Login</a>
+        <a class="nav-link" href="#" id="login"><i class="fa fa-sign-in-alt icon"></i>Login</a>
         <?php else: ?>
         <div class="dropdown mr-4">
             <a href="#" class="nav-link" id="account_settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
