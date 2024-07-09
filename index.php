@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
 <?php
 session_start();
 include('admin/db_connect.php');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
 ob_start();
 $query = $conn->query("SELECT * FROM system_settings limit 1");
 if ($query) {
@@ -30,137 +39,139 @@ include('header.php');
     body {
         background-color: #f8f9fa;
         color: #343a40;
-        display: flex;
         font-family: 'Arial', sans-serif;
     }
-    .sidebar {
-        width: 250px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: #9DB2BF;
-        color: #343a40;
-        padding-top: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        overflow-y: auto; /* Allows scrolling on the sidebar */
+    .greentop {
+        width: 100%;
+        height: 3.75rem;
+        background-color: #005b00;
     }
-    .sidebar a {
-        padding: 12px 20px; 
-        text-decoration: none;
-        text-align: center;
-        font-size: 1.5rem; 
+    .navbar {
+        width: 100%;
+        background-color: #ffffff;
         color: #343a40;
+        padding: 1.4rem 1.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        transition: height 0.3s ease;
         display: flex;
+        align-items: center;
+    }
+    .navbar .navbar-brand {
+        position: absolute;
+        top: -30px;
+        left: 20px;
+        display: flex;
+        align-items: center;
+    }
+    .navbar img {
+        position: relative;
+        margin-left: 10rem;
+        top: .2rem;
+        width: 20rem;
+    }
+    .navbar .nav-link {
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #343a40;
+        display: inline-block;
         transition: all 0.3s ease;
         border-radius: 4px;
+        background-color: #ffffff;
+        margin: 0 10px;
     }
-    .icon {
-        font-size: 2rem;
-        margin-right: 1rem; 
-    }
-    .sidebar .nav-link:hover {
-        color: #9DB2BF;
-        background-color: #526D82;
-        transform: translateX(10px);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
-    .sidebar .navbar-brand {
-        font-weight: bold;
-        color: #007bff;
-        padding: 15px 20px;
-        display: block;
-        text-align: center;
-    }
-    .sidebar .navbar-brand img {
-        width:9rem;
-        margin-right: 10px;
+    .navbar-nav-center {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
     }
     .content {
-        margin-left: 250px;
         padding: 20px;
-        width: calc(100% - 250px);
+        margin-top: 60px;
     }
-    .dropdown-menu {
-        left: -2.5em;
+    @media (max-width: 990px) {
+        .navbar img {
+            margin-left: 1.5rem;
+            z-index: 10000;
+        }
+        .navbar-nav {
+            margin-top: 2rem;
+        }
+        .navbar {
+            padding: 2rem 1.5rem;
+            height: auto;
+        }
     }
-    .modal-content {
-        border-radius: 8px;
-        overflow: hidden;
+    @media (max-width: 576px) {
+        .navbar img {
+            width: 12rem;
+            margin-left: 2rem;
+            top: 14px;
+        }
+        .navbar {
+            padding: .8rem;
+            height: auto;
+        }
+        .navbar-nav {
+            margin-top: 1.2rem;
+        }
+        .greentop {
+        height: 2rem;
     }
-    .btn-primary {
-        background-color: #007bff;
-        border: none;
-    }
-    .btn-secondary {
-        background-color: #6c757d;
-        border: none;
-    }
-    .btn-primary:hover, .btn-secondary:hover {
-        opacity: 0.8;
-    }
-    .table {
-        background-color: #ffffff;
-        border: none;
-    }
-    .table th, .table td {
-        border: none;
-    }
-    .toast {
-        position: fixed;
-        top: 1rem;
-        right: 1rem;
-        z-index: 1050;
-        min-width: 200px;
-        background-color: #343a40;
-        color: white;
-        padding: 1rem;
-        border-radius: 0.25rem;
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    }
-    #preloader {
-        position: fixed;
-        left: 0;
-        top: 0;
-        z-index: 9999;
-        width: 100%;
-        height: 100%;
-        overflow: visible;
-        background: #ffffff;
-    }
-    footer {
-        background: #ffffff;
     }
 </style>
 
 <body id="page-top">
-    <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="greentop"></div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="./">
-            <img src="assets/img/logo.png" alt="Logo"> 
+            <img src="assets/img/Logo.png" alt="logo">
         </a>
-        <a class="nav-link" href="index.php?page=home"><i class="fa fa-home icon"></i>Home</a>
-        <a class="nav-link" href="index.php?page=alumni_list"><i class="fa fa-users icon"></i>Alumni</a>
-        <a class="nav-link" href="index.php?page=gallery"><i class="fa fa-image icon"></i>Gallery</a>
-        <?php if(isset($_SESSION['login_id'])): ?>
-        <a class="nav-link" href="index.php?page=careers"><i class="fa fa-briefcase icon"></i>Jobs</a>
-        <a class="nav-link" href="index.php?page=forum"><i class="fa fa-comments icon"></i>Forums</a>
-        <?php endif; ?>
-        <a class="nav-link" href="index.php?page=about"><i class="fa fa-info-circle icon"></i>About</a>
-        <?php if(!isset($_SESSION['login_id'])): ?>
-        <a class="nav-link" href="#" id="login"><i class="fa fa-sign-in-alt icon"></i>Login</a>
-        <?php else: ?>
-        <div class="dropdown mr-4">
-            <a href="#" class="nav-link" id="account_settings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user"></i> <?php echo $_SESSION['login_name'] ?> <i class="fa fa-angle-down"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="account_settings">
-                <a class="dropdown-item" href="index.php?page=my_account" id="manage_my_account"><i class="fa fa-cog"></i> Manage Account</a>
-                <a class="dropdown-item" href="admin/ajax.php?action=logout2"><i class="fa fa-power-off"></i> Logout</a>
-            </div>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav navbar-nav-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=alumni_list">Alumni</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=gallery">Gallery</a>
+                </li>
+                <?php if(isset($_SESSION['login_id'])): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=careers">Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=forum">Forums</a>
+                </li>
+                <?php endif; ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?page=about">About</a>
+                </li>
+                <?php if(!isset($_SESSION['login_id'])): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="login">Login</a>
+                </li>
+                <?php else: ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="account_settings" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo $_SESSION['login_name'] ?> <i class="fa fa-angle-down"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="account_settings">
+                        <a class="dropdown-item" href="index.php?page=my_account" id="manage_my_account">Manage Account</a>
+                        <a class="dropdown-item" href="admin/ajax.php?action=logout2">Logout</a>
+                    </div>
+                </li>
+                <?php endif; ?>
+            </ul>
         </div>
-        <?php endif; ?>
-    </div>
+    </nav>
 
     <div class="content">
         <?php 
@@ -174,65 +185,7 @@ include('header.php');
         ?>
     </div>
 
-    <div class="toast" id="alert_toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-body text-white"></div>
-    </div>
-
-    <div class="modal fade" id="confirm_modal" role="dialog">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirmation</h5>
-                </div>
-                <div class="modal-body">
-                    <div id="delete_content"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="confirm" onclick="">Continue</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="uni_modal" role="dialog">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                </div>
-                <div class="modal-body"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="submit" onclick="$('#uni_modal form').submit()">Save</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="uni_modal_right" role="dialog">
-        <div class="modal-dialog modal-full-height modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span class="fa fa-arrow-right"></span>
-                    </button>
-                </div>
-                <div class="modal-body"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="viewer_modal" role="dialog">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <button type="button" class="btn-close" data-dismiss="modal"><span class="fa fa-times"></span></button>
-                <img src="" alt="">
-    </div>
-            </div>
-            
-            <div id="preloader"></div>
+    <div id="preloader"></div>
 
 <?php include('footer.php') ?>
 <script>
@@ -244,8 +197,6 @@ include('header.php');
         $('#login').click(function() {
             uni_modal("Login", 'login.php');
         });
-
-        // Additional scripts...
     });
 </script>
 
